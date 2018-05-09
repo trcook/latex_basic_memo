@@ -1,0 +1,170 @@
+\ProvidesPackage{mymemobiblatex}
+\usepackage{dcolumn}
+\usepackage{quotes} %enables some quote environment. I'm not sure if I
+					%use it but don't touch it just
+					%yet... 2010-06-08(20:40)
+
+
+\usepackage{geometry} % See geometry.pdf to learn the layout
+					  % options. There are lots.
+
+
+
+\geometry{letterpaper}                   % ... or a4paper or a5paper
+
+%\geometry{landscape}                % Activate for for rotated page
+									 %geometry
+
+\RequirePackage{fancyhdr} 
+
+\pagestyle{fancy}
+
+\usepackage{verbatim} %this package enables comment environment and
+					  %verbatim environment. Allows multiline comments
+					  %to be used w/o % sign at beginning of each
+					  %line, so long as those comments occur within
+					  %the comment environment. Usage
+					  %= \begin{comment} ...\%end{comment}. Verbatim
+					  %allows raw data to be input into file without
+					  %concern about symbols or special
+					  %characters. environment usage same as for
+					  %comment.
+
+
+\usepackage{setspace}%enables setting the spacing using \singlespacing
+					 %or \doublespacing
+
+
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with
+								  %an empty line rather than an indent
+
+
+\usepackage{url}%enables printing of urls in bibliography -- i think
+				%its for line breaking
+
+
+\usepackage{booktabs}%This package provide some additional commands to
+					 %enhance the quality of tables in
+					 %LaTeX. Guidelines are given as to what
+					 %constitutes a good table in this context.
+
+\usepackage{ctable} %use for some tables, esp appendix a and for
+					%tables in analysis. Is needed for footnotes in
+					%tables.
+
+\usepackage{afterpage}%use this to clear page after floats usage:
+					  %\afterpage{\clearpage}
+
+\usepackage{graphicx}%for including images. 
+
+\usepackage[reqno]{amsmath}
+	
+\usepackage{amssymb}%math symbols
+\usepackage{amsthm} % theorem tools -- used for hypothesis environment.
+
+%\usepackage{epstopdf}%for converting eps to pdf
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\usepackage{tocvsec2}%for table of contents -- sets section numbering
+
+\usepackage[small,compact]{titlesec} %for customizing appearance of
+	  								 %section titles
+
+\title{}
+\newcommand{\mytitle}{to fix do \textbackslash renewcommand\{\textbackslash mytitle\}\{title\}}%sets \mytitle macro
+\newcommand{\mysubtitle}{}
+%\author{Thomas Cook}%sets author macro
+\newcommand{\myauthor}{Thomas Cook}%sets \myauthor macro
+%\date{} % Activate to display a given date or no date
+
+\newenvironment{changemargin}[2]{%this environment allows margins on
+								%left and right to be changed -- for
+								%block quoting etc.
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#2}%
+    \setlength{\rightmargin}{#1}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+%%%
+%\subsectionfont{\large\mdseries\itshape} %sets size/shape of section title font.
+%\renewcommand{\sectionmark}[1]{% 
+%\markboth{#1}{}
+%}%I think this sets the \leftmark and \rightmark macros to non-capitalized section titles for fancyhead
+\fancyhf{}
+%\fancyhead[RO,RE]{\small\leftmark}%places section title on right hand side head
+%\fancyhead[LO,LE]{\small\myauthor}
+
+\fancyhead[L]{\small \myauthor}
+\fancyhead[R]{\small\mytitle\ - \thepage}
+
+%\fancyhead[C]{\small\mytitle}
+
+\setlength\headwidth{6.5in}%changes vertical margins -- needed to make sure header rule is same width as line width
+\geometry{paperheight={11in},paperwidth={8.5in}}
+\geometry{totalheight={10in},totalwidth={6.5in},includeheadfoot}
+\setcounter{secnumdepth}{-1}%removes numbers from section titles.
+
+% Set biblatex
+\usepackage[natbib=true,style=authoryear-icomp,autocite=plain,backend=bibtex]{biblatex}
+
+%the following will supress the word in: in article citations
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{%
+  \printtext{\bibstring{in}\intitlepunct}}}
+	
+
+% this sets up the footnote year citation:
+
+
+\renewcommand{\citep}{\footcite[see][]}
+
+\renewcommand{\citet}[1]{\citeauthor{#1}\footyearcite{#1}}
+\DeclareCiteCommand{\footyearcite}[\mkbibfootnote]
+  {\usebibmacro{cite:init}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{citeyear}}
+  {}
+  {\usebibmacro{cite:postnote}}
+
+
+\usepackage{caption}
+\usepackage{floatrow}
+%\usepackage{natbib}
+%\usepackage{hyperref}
+\floatsetup[figure]{heightadjust=all,valign=c,style=Ruled}
+\floatsetup[table]{heightadjust=all,valign=c,style=Ruled}
+\captionsetup[table]{justification=centering,labelsep=colon}
+\captionsetup[figure]{justification=centering,labelsep=colon}
+\graphicspath{{Graphics/}}
+\def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
+
+\usepackage{hyperref}
+\usepackage{bookmark}
+\hypersetup{% sets up hyperlink stuff
+pdfdisplaydoctitle=true,
+%pdfpagelabels=false,
+   colorlinks=false,
+    pdfborder={0 0 0},
+pdfinfo={
+Author={Thomas Cook}}}
+
+
+\usepackage{thmtools}
+\declaretheoremstyle[
+  spaceabove=6pt, spacebelow=6pt,
+  headfont=\normalfont\bfseries,
+  notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont,
+  postheadspace=1em,
+headpunct={:},
+]{mystyle}
+
+\declaretheorem[style=mystyle,name=H,refname={H,hypotheses},
+  Refname={H,Hypotheses}]{hypothesis}
+
