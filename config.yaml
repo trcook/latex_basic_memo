@@ -1,0 +1,26 @@
+---
+# each file will be converted into an html.
+# include path only in next line
+pdf_output_path: "./"
+# Where is the pandoc template for the brownbag in revealjs
+
+# this next line is the location of reveal.js relative to the final output file. If the final output will be in the reveal.js directory itself, you can set this to ./. Otherwise, the directory should end in reveal.js
+
+# PICKUPHERE: add flag to set for converting an rmd or just straight md to reveal. 
+
+# give one of two formats here, md or rmd.this effects how rake will run
+
+excludes: ['.*readme.*','.*pandoc.*','.*README.*']
+header_includes_file: 'header_includes.tex'
+template: 'mymemo.latex'
+myauthor: Thomas R. Cook
+mytitle: 'Change Title in Yaml'
+fontsize: 12
+draft: True
+
+note: "Change to false in yaml to remove"
+maketitle: False
+setauthor: True
+biblatex: True
+bibliographyfiles: /s/dissandprojects.bib
+---

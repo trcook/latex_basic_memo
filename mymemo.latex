@@ -1,13 +1,13 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(draft)$draft,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$]{$documentclass$}
-$if(biblatex)$
 \usepackage{mymemobiblatex}
+$if(biblatex)$
+
 $for(bibliographyfiles)$
 \addbibresource{$bibliographyfiles$}
 $endfor$
 $else$
-\usepackage{mymemo}
+%\usepackage{mymemo}
 $endif$
-
 $for(header-includes)$
 $header-includes$
 $endfor$
@@ -16,9 +16,9 @@ $if(mytitle)$
 \renewcommand{\mytitle}{$mytitle$}
 $endif$
 $if(myauthor)$
-\renewcommand{\myauthor}{$myauthor$}
+\renewcommand{\myauthor}{}
 $if(setauthor)$
-\author{$myauthor$}
+\author{ }
 $endif$
 $endif$
 $if(date)$
@@ -27,9 +27,20 @@ $else$
 \date{}
 $endif$
 
+\setkeys{Gin}{draft=false}
+
+
+% add tightlist to shut pandoc up
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 
 
 \begin{document}
+
+\begin{tikzpicture}[remember picture,overlay]
+        \node at ([xshift=3cm,yshift=2cm]current page.south west) {\tiny \color[gray]{.8} Last Revised: \gitAuthorDate};    %% yshift and xshift for example only
+\end{tikzpicture}
 
 $if(note)$
 \thispagestyle{plain}
