@@ -22,5 +22,5 @@ note: "Change to false in yaml to remove"
 maketitle: False
 setauthor: True
 biblatex: True
-bibliographyfiles: /s/dissandprojects.bib
+bibliographyfiles: resources.bib
 ---
