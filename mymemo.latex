@@ -1,30 +1,32 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(draft)$draft,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$]{$documentclass$}
 \usepackage{mymemobiblatex}
-$if(biblatex)$
 
-$for(bibliographyfiles)$
-\addbibresource{$bibliographyfiles$}
-$endfor$
-$else$
-%\usepackage{mymemo}
+$if(biblatex)$
+	$for(bibliographyfiles)$
+		\addbibresource{$bibliographyfiles$}
+	$endfor$
 $endif$
+
 $for(header-includes)$
-$header-includes$
+	$header-includes$
 $endfor$
 
 $if(mytitle)$
-\renewcommand{\mytitle}{$mytitle$}
+	\renewcommand{\mytitle}{$mytitle$}
+	\title{\mytitle{}}
 $endif$
+
 $if(myauthor)$
-\renewcommand{\myauthor}{}
-$if(setauthor)$
-\author{ }
+	\renewcommand{\myauthor}{$myauthor$}
+	$if(setauthor)$
+		\author{\myauthor{}}
+	$endif$
 $endif$
-$endif$
+
 $if(date)$
-\date{$date$}
+	\date{$date$}
 $else$
-\date{}
+	\date{}
 $endif$
 
 \setkeys{Gin}{draft=false}
@@ -38,65 +40,67 @@ $endif$
 
 \begin{document}
 
+
+
+$if(note)$
+	\thispagestyle{plain}
+	\noindent\textbf{NOTE:} 
+	$note$
+
+	$if(maketitle)$
+		\begin{center}
+			{\Large \mytitle{}}\\
+			\small \myauthor{}\\
+		\end{center}
+	$endif$
+$else$
+	$if(maketitle)$
+		\maketitle
+	$endif$
+$endif$
+
+
+% watermark picture must come after \maketitle
 \begin{tikzpicture}[remember picture,overlay]
         \node at ([xshift=3cm,yshift=2cm]current page.south west) {\tiny \color[gray]{.8} Last Revised: \gitAuthorDate};    %% yshift and xshift for example only
 \end{tikzpicture}
 
-$if(note)$
-\thispagestyle{plain}
-\noindent\textbf{NOTE:} 
-$note$
-
-
-\begin{center}
-{\Large $mytitle$}\\
-
-\small $myauthor$\\
-
-\end{center}
-$else$
-
-$if(maketitle)$
-\title{$mytitle$}
-\maketitle
-$endif$
-$endif$
 
 $for(include-before)$
-$include-before$
-
+	$include-before$
 $endfor$
+
 $if(toc)$
-{
-\hypersetup{linkcolor=black}
-\setcounter{tocdepth}{$toc-depth$}
-\tableofcontents
-}
+	{
+	\hypersetup{linkcolor=black}
+	\setcounter{tocdepth}{$toc-depth$}
+	\tableofcontents
+	}
 $endif$
+
 $body$
 
 $if(natbib)$
+	$if(bibliographyfiles)$
+		$if(biblio-title)$
+			$if(book-class)$
+				\renewcommand\bibname{$biblio-title$}
+			$else$
+				\renewcommand\refname{$biblio-title$}
+			$endif$
+		$endif$
+	$endif$
+$endif$
+
 $if(bibliographyfiles)$
-$if(biblio-title)$
-$if(book-class)$
-\renewcommand\bibname{$biblio-title$}
-$else$
-\renewcommand\refname{$biblio-title$}
-$endif$
-$endif$
-
-
-$endif$
-$endif$
-$if(bibliographyfiles)$
-$if(biblatex)$
-\printbibliography
-$endif$
-
+	$if(biblatex)$
+		\printbibliography
+	$endif$
 $endif$
 
 $for(include-after)$
-$include-after$
-
+	$include-after$
 $endfor$
+
+
 \end{document}

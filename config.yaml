@@ -13,13 +13,13 @@ pdf_output_path: "./"
 excludes: ['.*readme.*','.*pandoc.*','.*README.*']
 header_includes_file: 'header_includes.tex'
 template: 'mymemo.latex'
-myauthor: Thomas R. Cook
-mytitle: 'Change Title in Yaml'
+myauthor: Set myauthor in config
+mytitle: "set mytitle in config.yaml"
 fontsize: 12
 draft: True
 
-note: "Change to false in yaml to remove"
-maketitle: False
+note: "Set note to false in config to remove"
+maketitle: True
 setauthor: True
 biblatex: True
 bibliographyfiles: resources.bib

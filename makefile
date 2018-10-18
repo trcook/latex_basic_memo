@@ -12,9 +12,9 @@ all: $(PDF)
 
 
 
-%.tex: %.md rakeconfig.yaml
+%.tex: %.md config.yaml
 
-	pandoc $< "rakeconfig.yaml" -f markdown -t latex -o $@ -s --template "mymemo.latex"  $(HINCLUDES)
+	pandoc $< "config.yaml" -f markdown -t latex -o $@ -s --template "mymemo.latex"  $(HINCLUDES)
 
 
 %.pdf: %.tex
